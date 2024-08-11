@@ -1,0 +1,49 @@
+
+@model IEnumerable<c_sharp_asp_net_core_player_tracker.Models.Player>
+
+@{
+    ViewData["Title"] = "Players";
+}
+
+
+<h1>@ViewData["Title"]</h1>
+<p><a asp-action="Create">Add Player</a></p>
+@if (Model.Count() == 0)
+{
+    <p>Could not find any players...</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Club</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var player in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => player.firstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => player.lastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => player.club)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@player.id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@player.id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@player.id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>Displays @Model.Count() of @Model.Count() players</p>
+}
